@@ -1,0 +1,47 @@
+{
+  "name": "web-api-server-monday-main",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "homepage": "https://github.com/ketsanato/web-api-server-monday-main#readme",
+  "bugs": {
+    "url": "https://github.com/ketsanato/web-api-server-monday-main/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/ketsanato/web-api-server-monday-main.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "server": "npx nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@netlify/functions": "^3.0.0",
+    "@types/express": "^5.0.0",
+    "bcryptjs": "^2.4.3",
+    "connect-redis": "^8.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.21.2",
+    "express-session": "^1.18.1",
+    "http": "^0.0.1-security",
+    "jsonwebtoken": "^9.0.2",
+    "lodash": "^4.17.21",
+    "mongodb": "^5.9.2",
+    "mongoose": "^6.9.2",
+    "nodemon": "^2.0.20",
+    "realm": "^11.5.1",
+    "serverless-http": "^3.2.0",
+    "uuid": "^11.0.4"
+  },
+  "devDependencies": {
+    "@checkly/cli": "^0.4.5"
+  },
+  "engines": {
+    "node": ">=14 <15"
+  }
+}
