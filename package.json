@@ -3,13 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "keywords": [],
-  "homepage": "https://github.com/ketsanato/web-api-server-monday-main#readme",
+  "homepage": "https://github.com/ketsanaMonday/web-api-server-monday-main#readme",
   "bugs": {
-    "url": "https://github.com/ketsanato/web-api-server-monday-main/issues"
+    "url": "https://github.com/ketsanaMonday/web-api-server-monday-main/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/ketsanato/web-api-server-monday-main.git"
+    "url": "git+ssh://git@github.com/ketsanaMonday/web-api-server-monday-main.git"
   },
   "license": "ISC",
   "author": "",
@@ -32,7 +32,7 @@
     "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.21",
     "mongodb": "^5.9.2",
-    "mongoose": "^6.9.2",
+    "mongoose": "^6.13.5",
     "nodemon": "^2.0.20",
     "realm": "^11.5.1",
     "serverless-http": "^3.2.0",

@@ -1,9 +1,5 @@
 "use strict";
 
-var _serverlessHttp = _interopRequireDefault(require("serverless-http"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
 var express = require('express');
 
 var cors = require('cors');
@@ -13,6 +9,8 @@ var dotenv = require('dotenv').config();
 var app = express();
 
 var conn = require('./connect/mongodb');
+
+var serverless = require("serverless-http");
 
 var _require = require('uuid'),
     uuidv4 = _require.v4;
@@ -101,15 +99,6 @@ app.listen(port, function () {
   console.log('Server listenting on port' + port);
 });
 app.get('/', function (req, res) {
-  var body = '';
-
-  if (req.session.views) {
-    ++req.session.views;
-  } else {
-    req.session.views = 1;
-    body += '<p>First time visiting? view this page in several browsers :)</p>';
-  }
-
-  res.send(body + '<p>viewed <strong>' + req.session.views + '</strong> times.</p>');
+  res.send("Run Server Monday");
 });
 exports.app = app;

@@ -3,6 +3,8 @@ const cors = require('cors');
 const dotenv = require('dotenv').config();
 const app = express();
 const conn = require('./connect/mongodb');
+const serverless =require("serverless-http");
+
 const { v4: uuidv4 } = require('uuid');
 const port = process.env.PORT;
 const session = require('express-session');
@@ -70,16 +72,8 @@ app.listen(port, () => {
     console.log('Server listenting on port' + port);
 })
 app.get('/', function(req, res){
-    var body = '';
-
-    if (req.session.views) {
-      ++req.session.views;
-    
-    } else {
-      req.session.views = 1;
-      body += '<p>First time visiting? view this page in several browsers :)</p>';
-    }
-    res.send(body + '<p>viewed <strong>' + req.session.views + '</strong> times.</p>');
+  res.send("Run Server Monday");
   });
-  import serverless from "serverless-http";
-exports.app = app;
+
+
+  exports.app = app;
