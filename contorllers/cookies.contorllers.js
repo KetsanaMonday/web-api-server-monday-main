@@ -17,6 +17,6 @@ module.exports.cookiesget=async (req,res,next)=>{
         res.cookie('email',email,{maxAge:60000})
         res.cookie('password',password,{maxAge:60000})
     
-        res.json({email:email,password:password})
+        res.json({email:email,password:password});
         
         }

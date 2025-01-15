@@ -1,214 +1,214 @@
 const userModels = require("../models/users1.models");
-const jwt=require('jsonwebtoken');
-const maxAge=60000;
+const jwt = require('jsonwebtoken');
+const maxAge = 60000;
 const bcrypt = require('bcryptjs');
 
 
-    module.exports.createUsers=async (req,res,next)=>{
+module.exports.createUsers = async (req, res, next) => {
 
-        const form=req.body;
-        console.log(form)
-        const salt =await bcrypt.genSalt();
-        password = await bcrypt.hash(form.password, salt);
-        
-        const data={
-            username:form.username,
-            password:password,
-            user_online:false,
-            user_type_id:form.user_type_id,
-            created_date:new Date()
-        }
-        console.log(data)
-     await userModels.create(data,err=>{
+    const form = req.body;
+    console.log(form)
+    const salt = await bcrypt.genSalt();
+    password = await bcrypt.hash(form.password, salt);
 
-        if(!err){
+    const data = {
+        username: form.username,
+        password: password,
+        user_online: false,
+        user_type_id: form.user_type_id,
+        created_date: new Date()
+    }
+    console.log(data)
+    await userModels.create(data, err => {
 
-        
+        if (!err) {
+
+
             console.log("Save");
             res.json({
-                status:true,
-                message:"Saved"
+                status: true,
+                message: "Saved"
 
             })
-        }else{
+        } else {
             console.log("error ");
-    
-            res.json({
-                status:false,
-        
-                message:"Email have been!"
 
-    
+            res.json({
+                status: false,
+
+                message: "Email have been!"
+
+
             })
         }
     })
 
-        
-
-
-           
 
 
 
-    };
 
 
-    module.exports.readUsers1=async (req,res,next)=>{
-   
-        userModels.aggregate([
-            {
-              $lookup:
-                {
-                  from: "user_types",
-                  localField: "user_type_id",
-                  foreignField: "_id",
-                  as: "user_type_name"
-                }
-           },
-        ]).exec((err,data)=>{
-    
-        if(!err){
-     
+
+
+};
+
+
+module.exports.readUsers1 = async (req, res, next) => {
+
+    userModels.aggregate([{
+        $lookup: {
+            from: "user_types",
+            localField: "user_type_id",
+            foreignField: "_id",
+            as: "user_type_name"
+        }
+    }, ]).exec((err, data) => {
+
+        if (!err) {
+
             res.json({
-                status:true, 
-                message:"selete all data ",
-            data:data
-        })
+                status: true,
+                message: "selete all data ",
+                data: data
+            })
 
-        }else{
-    
-    
+        } else {
+
+
             console.log("error");
             res.json({
-                status:false,
-            message:err
-        })
+                status: false,
+                message: err
+            })
         }
-      });
-            
-        }
+    });
 
-module.exports.readUsers=async (req,res,next)=>{
-   
-    userModels.find().exec((err,data)=>{
-
-    if(!err){
-
-  
-        res.json({
-            status:true, 
-            message:"selete all data ",
-        data:data
-    })
-    }else{
-
-
-    
-        res.json({
-            status:false,
-        message:err
-    })
-    }
-  });
-        
-    }
-
-    module.exports.testUser=async (req,res,next)=>{
-   
-        userModels.find().populate('author').exec((err,data)=>{
-
-        if(!err){
-    
-         
-            res.json({
-                status:true, 
-                message:"selete all data ",
-            data:data
-        })
-        }else{
-    
-    
-            console.log("error");
-            res.json({
-                status:false,
-            message:err
-        })
-        }
-      });
-            
-        }
-    
-    
-    module.exports.updateUsers=async (req,res,next)=>{
-
-const form=req.body;
-const salt =await bcrypt.genSalt();
-password = await bcrypt.hash(form.password, salt);
-
-const data={
-    email:form.email,
-    password:password,
-    user_type_id:form.user_type_id,
-    updated_date:new Date()
 }
-        userModels.findByIdAndUpdate(form._id,data,{useFindAndModify:false}).exec((err,data)=>{
 
-            if(!err){
-        console.log("Updatwe Sucess  ");
+module.exports.readUsers = async (req, res, next) => {
 
-                res.json({
-                    status:true,
-                message:"Update Sucess !",
-                data:data
-                
-                })
-      
-            }else{
-                console.log("error");
+    userModels.find().exec((err, data) => {
 
-          res.json({
-                    status:false,
-                message:err})
+        if (!err) {
 
 
-            }
-        })
+            res.json({
+                status: true,
+                message: "selete all data ",
+                data: data
+            })
+        } else {
 
 
 
+            res.json({
+                status: false,
+                message: err
+            })
+        }
+    });
+
+}
+
+module.exports.testUser = async (req, res, next) => {
+
+    userModels.find().populate('author').exec((err, data) => {
+
+        if (!err) {
+
+
+            res.json({
+                status: true,
+                message: "selete all data ",
+                data: data
+            })
+        } else {
+
+
+            console.log("error");
+            res.json({
+                status: false,
+                message: err
+            })
+        }
+    });
+
+}
+
+
+module.exports.updateUsers = async (req, res, next) => {
+
+    const form = req.body;
+    const salt = await bcrypt.genSalt();
+    password = await bcrypt.hash(form.password, salt);
+
+    const data = {
+        email: form.email,
+        password: password,
+        user_type_id: form.user_type_id,
+        updated_date: new Date()
     }
+    userModels.findByIdAndUpdate(form._id, data, {
+        useFindAndModify: false
+    }).exec((err, data) => {
 
-    module.exports.deleteUsers =async (req,res,next)=>{
+        if (!err) {
 
-        const form = req.body; 
-        
-        
-        userModels.findByIdAndDelete(form._id,{useFindAndModify:false}).exec((err,data)=>{
+            res.json({
+                status: true,
+                message: "Update Sucess !",
+                data: data
 
-            if(!err){
-        console.log("Delete Sucess  ");
+            })
 
-                res.json({
-                    status:true,
-                message:"Delete Sucess !",
-                data:data
-                
-                })
-      
-            }else{
+        } else {
+            console.log("error");
 
-                console.log(" Delete error");
-
-          res.json({
-                    status:false,
-                message:err})
+            res.json({
+                status: false,
+                message: err
+            })
 
 
-            }
-        })
+        }
+    })
 
 
 
-    }
+}
+
+module.exports.deleteUsers = async (req, res, next) => {
+
+    const form = req.body;
 
 
+    userModels.findByIdAndDelete(form._id, {
+        useFindAndModify: false
+    }).exec((err, data) => {
+
+        if (!err) {
+            console.log("Delete Sucess  ");
+
+            res.json({
+                status: true,
+                message: "Delete Sucess !",
+                data: data
+
+            })
+
+        } else {
+
+            console.log(" Delete error");
+
+            res.json({
+                status: false,
+                message: err
+            })
+
+
+        }
+    })
+
+
+
+}

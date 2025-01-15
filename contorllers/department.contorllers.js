@@ -1,5 +1,5 @@
 
-const Department = require("../models/department.models");
+const Department = require("../models/Department.models");
 
 
 
